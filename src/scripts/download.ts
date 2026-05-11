@@ -1,5 +1,5 @@
 import { env } from "~/env.mjs";
-import { openSourceModels, tempLlama3HackGetRevision } from "~/models";
+import { openSourceModels } from "~/models";
 import { promises as fs } from "fs";
 import { resolve } from "path";
 import { z } from "zod";
@@ -9,8 +9,6 @@ async function download() {
     const [orgId, modelId] = z
       .tuple([z.string(), z.string()])
       .parse(modelName.split("/"));
-
-    const rev = tempLlama3HackGetRevision(modelName);
 
     for (const file of ["tokenizer.json", "tokenizer_config.json"]) {
       const targetDir = resolve("public/hf", orgId, modelId);
@@ -24,11 +22,10 @@ async function download() {
       // eg https://huggingface.co/codellama/CodeLlama-7b-hf/resolve/main/tokenizer.json
       const res = await fetch(
         `https://huggingface.co/${orgId}/${modelId}/resolve/${encodeURIComponent(
-          rev
+          "main"
         )}/${file}`,
         {
           headers: {
-            Authorization: `Bearer ${env.HF_API_KEY}`,
             ContentType: "application/json",
           },
         }

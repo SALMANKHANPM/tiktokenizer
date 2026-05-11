@@ -59,7 +59,7 @@ export function EncoderSelect(props: {
           <Command>
             <CommandInput placeholder="Search model or encoder..." />
             <CommandEmpty>No model or encoder found.</CommandEmpty>
-            <CommandGroup heading="Popular">
+            {/*<CommandGroup heading="Popular">
               {POPULAR.map((value) => (
                 <CommandItem
                   key={value}
@@ -69,7 +69,7 @@ export function EncoderSelect(props: {
                   {value}
                 </CommandItem>
               ))}
-            </CommandGroup>
+            </CommandGroup>*/}
 
             <CommandSeparator />
 
@@ -105,7 +105,7 @@ export function EncoderSelect(props: {
 
             <CommandSeparator />
 
-            <CommandGroup heading="OpenAI Models">
+            {/*<CommandGroup heading="OpenAI Models">
               {oaiModels.options
                 .filter((x) => !POPULAR.includes(x))
                 .map((value) => (
@@ -117,7 +117,7 @@ export function EncoderSelect(props: {
                     {value}
                   </CommandItem>
                 ))}
-            </CommandGroup>
+            </CommandGroup>*/}
           </Command>
         </PopoverContent>
       </Popover>

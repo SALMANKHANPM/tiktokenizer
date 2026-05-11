@@ -6,7 +6,6 @@ import { z } from "zod";
  */
 const server = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]),
-  HF_API_KEY: z.string().min(1),
 });
 
 /**
