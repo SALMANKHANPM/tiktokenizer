@@ -11,7 +11,7 @@ import { ChatGPTEditor } from "../sections/ChatGPTEditor";
 import { EncoderSelect } from "~/sections/EncoderSelect";
 import { TokenViewer } from "~/sections/TokenViewer";
 import { TextArea } from "~/components/Input";
-import { type AllOptions, isChatModel, isValidOption } from "~/models";
+import { type AllOptions, isValidOption } from "~/models";
 import { createTokenizer } from "~/models/tokenizer";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
@@ -22,7 +22,7 @@ function useQueryParamsState() {
   const params = useMemo((): AllOptions => {
     return isValidOption(router.query?.model)
       ? router.query.model
-      : "gpt-4o";
+      : "Qwen/Qwen3.6-35B-A3B";
   }, [router.query]);
 
   const setParams = (model: AllOptions) => {
@@ -62,19 +62,12 @@ const Home: NextPage<
             isLoading={tokenizer.isFetching}
             onChange={(update) => {
               setModel(update);
-              if (isChatModel(update) !== isChatModel(model)) {
-                setInputText("");
-              }
             }}
           />
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
           <section className="flex flex-col gap-4">
-            {isChatModel(model) && (
-              <ChatGPTEditor model={model} onChange={setInputText} />
-            )}
-
             <TextArea
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
